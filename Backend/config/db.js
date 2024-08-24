@@ -1,7 +1,7 @@
 
 const mongoose = require("mongoose");
 
-const connectDB = async ( url = "mongodb://localhost:27017/find-your-home") => {
+const connectDB = async ( url = "mongodb+srv://shashankgunda03:4vBVeo9bkDnalZ9M@find-your-home.9cq5e.mongodb.net/find-your-home") => {
     try {
         await mongoose.connect(url);
         console.log("Database is connected successfully");
