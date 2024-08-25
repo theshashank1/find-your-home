@@ -5,16 +5,20 @@ const cookieParser = require('cookie-parser');
 
 const usersRouter = require('./routes/users');
 const propertiesRouter = require('./routes/properties');
-const chatRouter = require('./routes/chat');
+
 const rentalsRouter = require('./routes/rentals');
 const searchRouter = require('./routes/search');
 
 const {connectDB} = require('./config/db')
 connectDB()
+const cors=require("cors")
 
-
-
-const app = express();
+const app =express();
+app.use(cors({
+    origin: '*', // Allow requests from any origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow any HTTP method
+   
+  }))
 
 app.use(express.json());
 app.use(cookieParser());
@@ -22,7 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/users', usersRouter);
 app.use('/api/properties', propertiesRouter);
-app.use('/api/chat', chatRouter);
 app.use('/api/rentals', rentalsRouter);
 app.use('/api/search', searchRouter);
 
