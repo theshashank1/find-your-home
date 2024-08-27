@@ -58,7 +58,7 @@ router.get('/search', async (req, res) => {
     });
 
     if (properties.length === 0) {
-      return res.status(404).json({ message: 'No properties found' });
+      return res.status(404).json([]);
     }
 
     res.json(properties);

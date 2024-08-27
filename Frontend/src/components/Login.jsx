@@ -2,13 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
+import {useDispatch} from "react-redux"
+import {setUser} from "../store/userSlice"
 const Login = () => {
   const navigate=useNavigate()
+  const dispatch=useDispatch()
+ 
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,7 +25,9 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:3000/api/users/login', formData);
       console.log('Login response:', response.data);
+      dispatch(setUser(response.data.user))
       // navigate('/dashboard'); // Redirect on successful login
+      navigate("/home")
     } catch (error) {
    
       console.error('Login error:', error);
@@ -37,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 ">
       <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
 

@@ -65,9 +65,9 @@ router.post('/login', async (req, res) => {
     token = setUser(user)
     res.cookie('user', token)
     console.log(getUser(token))
-    res.json({ message: 'Logged in successfully', token: token });
+    res.json({ message: 'Logged in successfully', token: token,user:user });
   } catch (error) {
-    console.error(error );
+    console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 });
