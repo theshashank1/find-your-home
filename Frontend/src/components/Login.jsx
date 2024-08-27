@@ -27,6 +27,7 @@ const Login = () => {
       console.log('Login response:', response.data);
       dispatch(setUser(response.data.user))
       // navigate('/dashboard'); // Redirect on successful login
+      navigate("/home")
     } catch (error) {
    
       console.error('Login error:', error);

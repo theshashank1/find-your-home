@@ -25,7 +25,7 @@ const SignUp = () => {
         try {
             const response = await axios.post('http://localhost:3000/api/users/signup', formData);
             console.log('Signup response:', response.data);
-            navigate('/login'); // Redirect on successful signup
+            navigate('/'); // Redirect on successful signup
           }
            catch (error) {
             
