@@ -18,12 +18,12 @@ const Navbar = () => {
       <>
         <div className="w-[70%] flex items-center px-20">
         <ul className="w-full flex items-center justify-evenly ">
-         <li><Link to="/home">Home</Link></li>
-         <li><Link to="/properties">All Properties</Link></li>
-         <li> <a href="#aboutus" className="hover:cursor-pointer">About Us</a></li>
-        <li><a href="#contactus" className="hover:cursor-pointer">Contact Us</a> </li>
+         <Link to="/home">Home</Link>
+         <Link to="/properties">All Properties</Link>
+         <a href="#aboutus" className="hover:cursor-pointer">About Us</a>
+        <a href="#contactus" className="hover:cursor-pointer">Contact Us</a> 
          {
-          user?.role=="landlord" && <li><Link to="/addproperty">Add Property</Link></li>
+          user?.role=="landlord" && <Link to="/addproperty">Add Property</Link>
          }
 
         </ul>
