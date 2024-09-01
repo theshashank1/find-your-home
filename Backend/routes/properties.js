@@ -10,63 +10,6 @@ const { getUser } = require('../services/auth');
 // Helper function for ObjectId validation
 const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
 
-// // Add Property
-// router.post('/', async (req, res) => {
-//   try {
-//     const { title, description, price, location, type, bedrooms, bathrooms, amenities } = req.body;
-
-//     // Get the token from the cookie
-//     const token = req.cookies.user;
-    
-//     if (!token) {
-//       return res.status(401).json({ message: 'No token provided' });
-//     }
-
-//     // Get user from token
-//     const user = getUser(token);
-
-//     console.log(user)
-    
-//     if (!user) {
-//       return res.status(401).json({ message: 'Invalid or expired token' });
-//     }
-
-//     const ownerId = user._doc._id;
-//     const message = `Hello,\n\nI am interested in your property "${title}" which is available for rent.\n\nLocated at:\n${location.address}, ${location.city}, ${location.country}, ${location.postalCode}\n\n With the property features:\n- Bedrooms: ${bedrooms}\n- Bathrooms: ${bathrooms}\n\nPlease let me know more details about the availability and rental terms.\n\nThank you!`;
-
-
-//     const chat = `https://wa.me/${user._doc.whatsappNumber.replaceAll(" ", "")}?text=${encodeURIComponent(message)}`
-
-//     // Validate presence of required fields
-//     if (!ownerId || !title || !description || !price || !location || !type || !bedrooms || !bathrooms) {
-//       return res.status(400).json({ message: 'All fields are required' });
-//     }
-
-//     // Validate ObjectId
-//     if (!isValidObjectId(ownerId)) {
-//       return res.status(400).json({ message: 'Invalid owner ID' });
-//     }
-
-//     // If validation passes, create the new property
-//     const property = new Property({
-//       ownerId,
-//       title,
-//       description,
-//       price,
-//       location,
-//       type,
-//       bedrooms,
-//       bathrooms,
-//       amenities,
-//       chat
-//     });
-
-//     await property.save();
-//     res.status(201).json(property);
-//   } catch (err) {
-//     res.status(400).json({ message: 'Validation error', error: err.message });
-//   }
-// });
 
 
 const multer = require('multer');
