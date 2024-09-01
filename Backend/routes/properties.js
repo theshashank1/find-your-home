@@ -1,6 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
 const router = express.Router();
 
 const Property = require('../models/properties');
@@ -69,14 +73,12 @@ const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
 // });
 
 
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+
 
 // Configure multer for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadPath = 'E:\\FinalProjects\\Find Your Home\\media';
+    const uploadPath = path.join(__dirname, '../../media'); // Relative path to media folder
     // Ensure the directory exists
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
