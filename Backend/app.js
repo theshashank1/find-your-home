@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 
 const usersRouter = require('./routes/users');
 const propertiesRouter = require('./routes/properties');
-
+const path = require('path');
 const rentalsRouter = require('./routes/rentals');
 const searchRouter = require('./routes/search');
 
@@ -23,7 +23,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/users', usersRouter);
 app.use('/api/properties', propertiesRouter);
 app.use('/api/rentals', rentalsRouter);

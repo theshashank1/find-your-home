@@ -26,19 +26,14 @@ const Details = () => {
     fetchData();
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <FaSpinner className="text-4xl animate-spin" />
-      </div>
-    );
-  }
+ 
 
   if (!data) {
     return <p className="text-center text-red-500">Failed to load data.</p>;
   }
 
   return (
+  
     <div className="p-6 pt-20">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         {/* Carousel Section */}
