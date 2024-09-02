@@ -2,12 +2,27 @@ import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import { useNavigate } from "react-router-dom";
-const Card = ({ data }) => {
-  const { _id,type, images, bedrooms, bathrooms, title, price, amenities } = data;
-  const navigate=useNavigate()
-  const handleClick=()=>{
-     navigate("details/"+_id)
+
+// Utility function to format image URLs
+const getFullImageUrl = (imagePath) => {
+  const baseUrl = "http://localhost:3000/";
+
+  // Check if the imagePath already includes the base URL
+  if (imagePath.startsWith("uploads/")) {
+    return `${baseUrl}${imagePath}`;
   }
+
+  // Return the imagePath as is if it already contains the base URL
+  return imagePath;
+};
+
+const Card = ({ data }) => {
+  const { _id, type, images, bedrooms, bathrooms, title, price, amenities } = data;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("details/" + _id);
+  };
 
   return (
     <div onClick={handleClick} className="bg-white rounded-lg overflow-hidden shadow-md w-[22%] cursor-pointer h-[350px] flex flex-col">
@@ -24,7 +39,7 @@ const Card = ({ data }) => {
           {images.map((image, index) => (
             <div key={index} className="h-48">
               <img
-                src={image}
+                src={getFullImageUrl(image)} // Use the utility function here
                 alt={`House image ${index + 1}`}
                 className="object-cover h-48 w-full"
               />
