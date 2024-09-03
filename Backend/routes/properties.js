@@ -3,14 +3,21 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+
 const Property = require('../models/properties');
+const User = require('../models/users');
+const { getUser } = require('../services/auth');
 
 const router = express.Router();
 
+// Helper function for ObjectId validation
+const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
+
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = 'uploads/';
+  destination: function (req, file, cb) {
+    const uploadPath = path.join(__dirname, '../../media'); // Relative path to media folder
+    // Ensure the directory exists
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });
     }
@@ -83,10 +90,6 @@ router.post('/', upload.array('images', 5), async (req, res) => {
   }
 });
 
-
-
-
-
 // Get Properties
 router.get('/', async (req, res) => {
   try {
@@ -97,11 +100,9 @@ router.get('/', async (req, res) => {
   }
 });
 
-
 // Get Property by ID
 router.get('/:id', async (req, res) => {
   try {
-   
     const property = await Property.findById(req.params.id);
 
     if (!property) {
@@ -113,7 +114,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
 
 // Update Property
 router.put('/:id', async (req, res) => {
@@ -148,8 +148,6 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({ message: 'Validation error', error: err.message });
   }
 });
-
-
 
 // Delete Property
 router.delete('/:id', async (req, res) => {
