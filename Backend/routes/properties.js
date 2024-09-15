@@ -150,6 +150,28 @@ router.get('/:id', async (req, res) => {
 });
 
 
+
+// Get Properties by Owner ID
+router.get('/owner/:id', async (req, res) => {
+  try {
+    const owner = req.params.id;
+
+    // Find all properties with the provided ownerId
+    const properties = await Property.find({ ownerId: owner });
+
+    if (!properties || properties.length === 0) {
+      return res.status(404).json({ message: 'No properties found for this owner' });
+    }
+
+    res.json(properties);
+  } catch (err) {
+    console.error('Error fetching properties:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 // Update Property
 router.put('/:id', async (req, res) => {
   try {
