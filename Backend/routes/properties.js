@@ -47,6 +47,8 @@ router.post('/', upload.array('images', 5), async (req, res) => {
       postalCode: req.body['location.postalCode']
     };
 
+    // const owner = req.body['']
+
     // Validate all required fields
     if (!title || !description || !price || !type || !bedrooms || !bathrooms || !amenities || !whatsappNumber || !location.address || !location.city || !location.country || !location.postalCode) {
       return res.status(400).json({ message: 'All fields are required' });
