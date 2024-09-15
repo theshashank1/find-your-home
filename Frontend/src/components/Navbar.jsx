@@ -29,7 +29,9 @@ const Navbar = () => {
         </ul>
 
       </div>
-      <div className="w-[3rem] h-[3rem] mt-2 flex items-center text-2xl justify-center rounded-[50%] bg-gray-300"><FaUser /></div>
+      <div className="w-[3rem] h-[3rem] mt-2 flex items-center text-2xl justify-center rounded-[50%] bg-gray-300">
+        <Link to="/userdetails"><FaUser /></Link>
+        </div>
       </>
       )
      }

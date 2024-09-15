@@ -16,6 +16,7 @@ const Details = () => {
         const response = await fetch(`http://localhost:3000/api/properties/${id}`); // Replace with your backend endpoint
         const result = await response.json();
         setData(result);
+        console.log(result);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -26,22 +27,19 @@ const Details = () => {
     fetchData();
   }, [id]);
 
- 
-
   if (!data) {
     return <p className="text-center text-red-500">Failed to load data.</p>;
   }
 
   return (
-  
     <div className="p-6 pt-20">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         {/* Carousel Section */}
         <div className="w-full flex justify-center mt-4">
-          <Carousel 
-            showThumbs={false} 
-            infiniteLoop={true} 
-            autoPlay={true} 
+          <Carousel
+            showThumbs={false}
+            infiniteLoop={true}
+            autoPlay={true}
             className="w-80 h-80"
           >
             {data?.images?.map((image, index) => (
@@ -61,7 +59,9 @@ const Details = () => {
           <div className="flex justify-between items-center mb-4">
             <div>
               <h1 className="text-2xl font-bold">{data?.title}</h1>
-              <p className="text-gray-500">{data?.type.charAt(0).toUpperCase() + data?.type.slice(1)}</p>
+              <p className="text-gray-500">
+                {data?.type.charAt(0).toUpperCase() + data?.type.slice(1)}
+              </p>
             </div>
             <a
               href={data?.chat}
@@ -72,6 +72,15 @@ const Details = () => {
               <FaWhatsapp className="mr-2" /> Contact Owner
             </a>
           </div>
+
+          {/* Status (Moved below Contact button, dynamic color) */}
+          <p
+            className={`text-lg font-semibold mb-4 ${
+              data?.status === "available" ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            Status: {data?.status}
+          </p>
 
           {/* Description */}
           <p className="text-gray-700 mb-4">{data?.description}</p>
