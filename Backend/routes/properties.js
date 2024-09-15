@@ -86,6 +86,41 @@ router.post('/', upload.array('images', 5), async (req, res) => {
 
 
 
+// Update Property Status by ID
+router.patch('/:id', async (req, res) => {
+  try {
+    const propertyId = req.params.id;
+    const { status } = req.body;
+
+    // Validate the status field
+    if (!status) {
+      return res.status(400).json({ message: 'Status field is required' });
+    }
+
+    // Find the property by ID and update its status
+    const updatedProperty = await Property.findByIdAndUpdate(
+      propertyId,
+      { status: status },
+      { new: true }  // Return the updated document
+    );
+
+    
+    if (!updatedProperty) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
+
+    
+    res.status(200).json(updatedProperty);
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ message: 'Internal server error', error: err.message });
+  }
+});
+
+
+
+
+
 
 // Get Properties
 router.get('/', async (req, res) => {

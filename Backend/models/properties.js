@@ -17,6 +17,7 @@ const propertySchema = new Schema({
   bathrooms: { type: Number, required: true },
   amenities: { type: [String] },
   images: { type: [String] },
+  status:{type:String, enum: ['available', 'unavailable'], default:'available'},
   chat: {type: String, require: true}
 }, 
 
