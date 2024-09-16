@@ -16,7 +16,7 @@ const cors=require("cors")
 const app =express();
 app.use(cors({
     origin: '*', // Allow requests from any origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow any HTTP method
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS',"PATCH"], // Allow any HTTP method
    
   }))
 

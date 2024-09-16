@@ -23,7 +23,13 @@ const Navbar = () => {
          <a href="#aboutus" className="hover:cursor-pointer">About Us</a>
         <a href="#contactus" className="hover:cursor-pointer">Contact Us</a> 
          {
-          user?.role=="landlord" && <Link to="/addproperty">Add Property</Link>
+          user?.role=="landlord" && 
+          <>
+             <Link to="/addproperty">Add Property</Link>
+             <Link to="/myproperties">MyProperties</Link>
+          </>
+       
+         
          }
 
         </ul>
