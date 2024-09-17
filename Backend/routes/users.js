@@ -11,7 +11,7 @@ const { setUser, getUser } = require('../services/auth');
 // Signup route
 router.post('/signup', async (req, res) => {
   try {
-    const { username, email, password, role, phone, whatsappNumber, profilePicture } = req.body;
+    const { username, email, password, role, phone, whatsappNumber } = req.body;
 
     // Check if user already exists
     let user = await User.findOne({ email });
@@ -30,8 +30,7 @@ router.post('/signup', async (req, res) => {
       password: hashedPassword,
       role,
       phone,
-      whatsappNumber,
-      profilePicture
+      whatsappNumber
     });
 
     await user.save();
@@ -60,14 +59,13 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Creating JWT Token For Secure Auth Every time
+    // Here you would typically create and send a JWT token
     // For simplicity, we're just sending a success message
     console.log(user)
     token = setUser(user)
     res.cookie('user', token)
     console.log(getUser(token))
-    res.json({ message: 'Logged in successfully', token: token });
-    
+    res.json({ message: 'Logged in successfully', token: token,user:user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
@@ -98,5 +96,4 @@ router.delete('/:id', async (req, res) => {
 })
 
 module.exports = router;
-
 
