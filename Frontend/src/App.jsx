@@ -10,6 +10,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import AddProperty from "./components/AddProperty";
 import "react-toastify/dist/ReactToastify.css";
+import MyProperties from "./components/MyProperties";
 const App = () => {
   return (
     <>
@@ -27,6 +28,7 @@ const App = () => {
       <Route path="/properties/details/:id" element={<Details/>}></Route>
       <Route path="/addproperty" element={<AddProperty/>}></Route>
       <Route path="/userdetails" element={<UserDetails/>}></Route>
+      <Route path="/myproperties" element={<MyProperties/>}></Route>
     </Routes>
 
     </>

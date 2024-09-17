@@ -30,6 +30,7 @@ router.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 router.post('/', upload.array('images', 5), async (req, res) => {
   try {
     const {
+      ownerId,
       title,
       description,
       price,
@@ -64,6 +65,7 @@ router.post('/', upload.array('images', 5), async (req, res) => {
 
     // Create a new Property instance
     const property = new Property({
+      ownerId,
       title,
       description,
       price: parseFloat(price),
